@@ -378,10 +378,35 @@ function startIntro() {
   }
 }
 
+let audioCtx = null;
+let heartbeatSource = null;
+let heartbeatGainNode = null;
+
 function playHeartbeat() {
   const hb = document.getElementById('heartbeat-sound');
   if (hb) {
-    hb.playbackRate = 2.05;
+    hb.playbackRate = 1.2;
+    
+    // Use Web Audio API to boost volume past 100% (2x boost)
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (AudioContext) {
+      if (!audioCtx) {
+        try {
+          audioCtx = new AudioContext();
+          heartbeatSource = audioCtx.createMediaElementSource(hb);
+          heartbeatGainNode = audioCtx.createGain();
+          heartbeatGainNode.gain.value = 3.0; // 3x gain
+          heartbeatSource.connect(heartbeatGainNode);
+          heartbeatGainNode.connect(audioCtx.destination);
+        } catch (e) {
+          console.log('Web Audio API setup error:', e);
+        }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+    
     hb.play().catch(e => console.log('Heartbeat autoplay blocked'));
   }
 }
