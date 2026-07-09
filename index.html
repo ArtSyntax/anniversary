@@ -14,6 +14,7 @@
   <link rel="preload" href="ans/zoo.jpg" as="image">
   <link rel="preload" href="memory/20250705.jpg" as="image">
   <link rel="preload" href="ans/tulip.jpg" as="image">
+  <link rel="preload" href="clip/1ans.mov" as="video">
 </head>
 <body>
 
@@ -209,7 +210,15 @@
       <div class="divider"></div>
       <p class="final-signature">รักนิ้งที่สุด จากอาร์ต</p>
       <p class="final-date">10/07/2026</p>
-      <div class="final-hearts">💕</div>
+      <div class="final-hearts" onclick="navigateTo('page-video'); playAnsVideo();" role="button" tabindex="0" style="cursor: pointer; display: inline-block;">💕</div>
+    </div>
+  </section>
+
+  <!-- ====== PAGE 11: Video ====== -->
+  <section class="page video-page" id="page-video">
+    <div class="card" style="padding: 20px 16px; max-width: 480px;">
+      <h2 class="gallery-header" style="margin-bottom: 20px;">วิดีโอของเรา 🎥</h2>
+      <video id="ans-video" src="clip/1ans.mov" controls playsinline muted style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); background: #000;"></video>
     </div>
   </section>
 

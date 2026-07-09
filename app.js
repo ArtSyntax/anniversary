@@ -312,6 +312,18 @@ function preloadRemainingImages() {
 }
 
 // =============================================
+// Video Control
+// =============================================
+function playAnsVideo() {
+  pauseMusic();
+  const vid = document.getElementById('ans-video');
+  if (vid) {
+    vid.currentTime = 0;
+    vid.play().catch(e => console.log('Video autoplay blocked:', e));
+  }
+}
+
+// =============================================
 // Initialize
 // =============================================
 document.addEventListener('DOMContentLoaded', function() {
