@@ -21,14 +21,15 @@
   <!-- ====== Floating Hearts Background ====== -->
   <div class="floating-hearts" aria-hidden="true" id="floatingHearts"></div>
 
-  <!-- ====== Background Music ====== -->
+  <!-- ====== Background Music & SFX ====== -->
   <audio id="bg-music" src="music/จากฝัน.mp3" preload="auto" loop playsinline></audio>
+  <audio id="heartbeat-sound" src="music/heartbeat.mp3" preload="auto" loop playsinline></audio>
   <button id="music-toggle" class="music-toggle-btn" onclick="toggleMusic()" aria-label="Toggle Music">
     🎵
   </button>
 
   <!-- ====== PAGE 1: Landing ====== -->
-  <section class="page active" id="page-landing">
+  <section class="page active intro-waiting" id="page-landing" onclick="startIntro()">
     <div class="card">
       <div class="heart-container">
         <span class="sparkle"></span>
@@ -217,7 +218,7 @@
   <!-- ====== PAGE 11: Video ====== -->
   <section class="page video-page" id="page-video">
     <div class="card" style="padding: 20px 16px; max-width: 480px;">
-      <h2 class="gallery-header" style="margin-bottom: 20px;">วิดีโอของเรา 🎥</h2>
+      <h2 class="gallery-header" style="margin-bottom: 20px;">ความทรงจำของเรา 🎥</h2>
       <video id="ans-video" src="clip/1ans.mov" playsinline muted style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); background: #000;"></video>
     </div>
   </section>

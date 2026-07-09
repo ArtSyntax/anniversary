@@ -737,3 +737,96 @@ body {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+.page.intro-waiting .card,
+.page.intro-animating .card {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  backdrop-filter: blur(0px) saturate(1);
+  -webkit-backdrop-filter: blur(0px) saturate(1);
+}
+
+.page.intro-animating .card {
+  animation: introCardReveal 1s ease forwards 0.3s;
+}
+
+.page.intro-waiting .sparkle,
+.page.intro-animating .sparkle {
+  display: none;
+}
+
+.page.intro-waiting {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.page.intro-waiting .heart-container {
+  transform: translateY(20vh);
+}
+
+.page.intro-waiting .heart-svg {
+  animation: introBeatsInfinite 0.9s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+.page.intro-animating .heart-container {
+  animation: introMoveUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.page.intro-animating .heart-svg {
+  animation: introBeatsOnce 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.page.intro-waiting .greeting,
+.page.intro-waiting .title,
+.page.intro-waiting .divider,
+.page.intro-waiting .subtitle,
+.page.intro-waiting .hint-text,
+.page.intro-waiting .btn,
+.page.intro-animating .greeting,
+.page.intro-animating .title,
+.page.intro-animating .divider,
+.page.intro-animating .subtitle,
+.page.intro-animating .hint-text,
+.page.intro-animating .btn {
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.page.intro-animating .greeting { animation: introFadeIn 0.8s ease forwards 0.3s; }
+.page.intro-animating .title { animation: introFadeIn 0.8s ease forwards 0.4s; }
+.page.intro-animating .divider { animation: introFadeIn 0.8s ease forwards 0.5s; }
+.page.intro-animating .subtitle { animation: introFadeIn 0.8s ease forwards 0.6s; }
+.page.intro-animating .hint-text { animation: introFadeIn 0.8s ease forwards 0.7s; }
+.page.intro-animating .btn { animation: introFadeIn 0.8s ease forwards 0.8s; }
+
+@keyframes introCardReveal {
+  to {
+    background: rgba(255, 255, 255, 0.72);
+    border-color: rgba(255, 187, 204, 0.35);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  }
+}
+
+@keyframes introMoveUp {
+  0% { transform: translateY(20vh); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes introBeatsInfinite {
+  0%, 100% { transform: scale(1.5); filter: drop-shadow(0 10px 30px rgba(255, 77, 109, 0.6)); }
+  50% { transform: scale(1.8); filter: drop-shadow(0 15px 40px rgba(255, 77, 109, 0.8)); }
+}
+
+@keyframes introBeatsOnce {
+  0% { transform: scale(1.5); filter: drop-shadow(0 10px 30px rgba(255, 77, 109, 0.6)); }
+  30% { transform: scale(1.8); filter: drop-shadow(0 15px 40px rgba(255, 77, 109, 0.8)); }
+  100% { transform: scale(1); filter: drop-shadow(0 8px 24px rgba(255, 77, 109, 0.4)); }
+}
+
+@keyframes introFadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}

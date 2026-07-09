@@ -327,9 +327,37 @@ function playAnsVideo() {
   }
 }
 
-// =============================================
-// Initialize
-// =============================================
+function startIntro() {
+  const landing = document.getElementById('page-landing');
+  if (landing && landing.classList.contains('intro-waiting')) {
+    landing.classList.remove('intro-waiting');
+    landing.classList.add('intro-animating');
+    
+    // Try to ensure heartbeat plays in case it was blocked on load
+    playHeartbeat();
+    
+    // Wait 3 seconds, then stop heartbeat and play main music
+    setTimeout(() => {
+      const hb = document.getElementById('heartbeat-sound');
+      if (hb) hb.pause();
+      
+      playMusic();
+    }, 3000);
+    
+    setTimeout(() => {
+      landing.classList.remove('intro-animating');
+    }, 1600);
+  }
+}
+
+function playHeartbeat() {
+  const hb = document.getElementById('heartbeat-sound');
+  if (hb) {
+    hb.playbackRate = 2.05;
+    hb.play().catch(e => console.log('Heartbeat autoplay blocked'));
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   createFloatingHearts();
 
@@ -344,8 +372,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Attempt to play music immediately
-  playMusic();
+  // Attempt to play heartbeat immediately (may be blocked by browser)
+  playHeartbeat();
 
   // Preload gallery images in the background
   preloadRemainingImages();
