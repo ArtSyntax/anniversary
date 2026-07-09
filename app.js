@@ -340,10 +340,10 @@ function startIntro() {
     // Try to ensure heartbeat plays in case it was blocked on load
     playHeartbeat();
     
-    // Unlock bg-music on iOS by playing silently during user gesture
+    // Unlock bg-music on iOS by playing muted during user gesture
     const music = document.getElementById('bg-music');
     if (music) {
-      music.volume = 0;
+      music.muted = true;
       music.play().catch(() => {});
     }
     
@@ -357,8 +357,11 @@ function startIntro() {
     setTimeout(() => {
       introInProgress = false;
       if (music) {
-        music.volume = 1;
+        music.pause();
         music.currentTime = 0;
+        music.muted = false;
+        music.volume = 1;
+        music.play().catch(() => {});
       }
       const btn = document.getElementById('music-toggle');
       if (btn) {
