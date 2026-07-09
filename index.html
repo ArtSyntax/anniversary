@@ -113,7 +113,7 @@
     <div class="photo-card">
       <img src="ans/zoo.JPG" alt="A Cup of Zoo Cafe" loading="lazy">
       <div class="photo-info">
-        <p class="photo-caption">ไปดูสัตว์น่ารักๆ ด้วยกัน แต่นิ้งน่ารักที่สุด 🐰</p>
+        <p class="photo-caption">ไปดูสัตว์น่ารัก แต่นิ้งน่ารักที่สุด 🐰</p>
       </div>
     </div>
     <button class="btn" onclick="navigateTo('page-quiz-ask-place')">
@@ -181,7 +181,7 @@
     <div class="gallery-grid" id="gallery-container">
       <!-- Dynamically rendered by JS -->
     </div>
-    <button class="btn" onclick="navigateTo('page-final')" style="margin-top: 32px;">
+    <button class="btn" onclick="navigateTo('page-video'); playAnsVideo();" style="margin-top: 32px;">
       ไปต่อ →
     </button>
   </section>
@@ -210,15 +210,15 @@
       <div class="divider"></div>
       <p class="final-signature">รักนิ้งที่สุด จากอาร์ต</p>
       <p class="final-date">10/07/2026</p>
-      <div class="final-hearts" onclick="navigateTo('page-video'); playAnsVideo();" role="button" tabindex="0" style="cursor: pointer; display: inline-block;">💕</div>
+      <div class="final-hearts">💕</div>
     </div>
   </section>
 
   <!-- ====== PAGE 11: Video ====== -->
   <section class="page video-page" id="page-video">
     <div class="card" style="padding: 20px 16px; max-width: 480px;">
-      <h2 class="gallery-header" style="margin-bottom: 20px;">ความทรงจำของเรา 🎥</h2>
-      <video id="ans-video" src="clip/1ans.mov" playsinline muted loop style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); background: #000;"></video>
+      <h2 class="gallery-header" style="margin-bottom: 20px;">วิดีโอของเรา 🎥</h2>
+      <video id="ans-video" src="clip/1ans.mov" playsinline muted style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); background: #000;"></video>
     </div>
   </section>
 

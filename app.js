@@ -319,6 +319,11 @@ function playAnsVideo() {
   if (vid) {
     vid.currentTime = 0;
     vid.play().catch(e => console.log('Video autoplay blocked:', e));
+    
+    // Auto navigate to final page when video ends
+    vid.onended = () => {
+      navigateTo('page-final');
+    };
   }
 }
 
