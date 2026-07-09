@@ -395,7 +395,7 @@ function playHeartbeat() {
           audioCtx = new AudioContext();
           heartbeatSource = audioCtx.createMediaElementSource(hb);
           heartbeatGainNode = audioCtx.createGain();
-          heartbeatGainNode.gain.value = 3.0; // 3x gain
+          heartbeatGainNode.gain.value = 2.0; // 2x gain
           heartbeatSource.connect(heartbeatGainNode);
           heartbeatGainNode.connect(audioCtx.destination);
         } catch (e) {
