@@ -605,14 +605,14 @@ body {
 }
 
 /* --- Final Page --- */
-.final-page {
-  padding-top: 60px;
-  padding-bottom: 60px;
+#page-final {
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
-.final-page .card {
+#page-final .card {
   background: rgba(255, 255, 255, 0.85);
-  padding: 40px 28px;
+  padding: 30px 28px;
 }
 
 .final-line {
@@ -636,7 +636,7 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-top: 24px;
+  margin-top: 12px;
   opacity: 0;
   transform: translateY(12px);
   animation: fadeInLine 0.8s ease forwards;
