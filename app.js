@@ -315,7 +315,6 @@ function preloadRemainingImages() {
 // Video Control
 // =============================================
 function playAnsVideo() {
-  pauseMusic();
   const vid = document.getElementById('ans-video');
   if (vid) {
     vid.currentTime = 0;
