@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="Happy 1st Anniversary 💕">
+  <meta name="theme-color" content="#FFE4EE">
+  <title>Happy Anniversary 💕</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💕</text></svg>">
+</head>
+<body>
+
+  <!-- ====== Floating Hearts Background ====== -->
+  <div class="floating-hearts" aria-hidden="true" id="floatingHearts"></div>
+
+  <!-- ====== PAGE 1: Landing ====== -->
+  <section class="page active" id="page-landing">
+    <div class="card">
+      <div class="heart-container">
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <span class="sparkle"></span>
+        <svg class="heart-svg" viewBox="0 0 512 512" aria-label="Heart">
+          <defs>
+            <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#FF8FAB"/>
+              <stop offset="50%" style="stop-color:#FF6B8A"/>
+              <stop offset="100%" style="stop-color:#FF4D6D"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#heartGrad)" d="M256 448l-30-27C118 322 48 261 48 181 48 117 98 64 160 64c36 0 70 17 96 44 26-27 60-44 96-44 62 0 112 53 112 117 0 80-70 141-178 240l-30 27z"/>
+        </svg>
+      </div>
+      <h1 class="greeting">สวัสดีครับพี่นิ้ง</h1>
+      <p class="title">Happy 1st Anniversary ของเรา</p>
+      <div class="divider"></div>
+      <p class="subtitle">มีความสุขมากๆ ตลอด 1 ปี ที่อยู่ด้วยกัน</p>
+      <p class="hint-text">ไม่เชื่อลองกดเข้าไปดูสิ 👇</p>
+      <button class="btn" id="btn-start" onclick="navigateTo('page-date-question')">
+        เข้าไปดูสิ 💕
+      </button>
+    </div>
+  </section>
+
+  <!-- ====== PAGE 2: Date Question ====== -->
+  <section class="page" id="page-date-question">
+    <div class="card">
+      <p class="question-text">💭 เป็นแฟนกันวันไหน?</p>
+      <p class="question-hint">(DDMMYYYY)</p>
+      <div class="input-group">
+        <input
+          type="text"
+          class="date-input"
+          id="date-answer"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          maxlength="8"
+          placeholder="DDMMYYYY"
+          autocomplete="off"
+        >
+        <button class="btn" id="btn-date-submit" onclick="checkDateAnswer()">
+          ตอบเลย ✨
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PAGE 3: Photo - Before Asking ====== -->
+  <section class="page" id="page-photo-before">
+    <div class="photo-card">
+      <img src="ans/0_month.jpg" alt="ความทรงจำก่อนเป็นแฟน" loading="eager">
+      <div class="photo-info">
+        <p class="photo-caption">กินข้าวกันก่อนขอเป็นแฟน อิอิ 😋</p>
+      </div>
+    </div>
+    <button class="btn" onclick="navigateTo('page-quiz-place')">
+      ไปต่อ →
+    </button>
+  </section>
+
+  <!-- ====== PAGE 4: Quiz - Where did we go? ====== -->
+  <section class="page" id="page-quiz-place">
+    <div class="card">
+      <p class="question-text">🤔 วันนั้นเราไปที่ไหนกัน?</p>
+      <div class="choices" id="quiz-place">
+        <button class="choice-btn" onclick="checkQuiz(this, 'quiz-place', false)">Bigbear Eatery</button>
+        <button class="choice-btn" onclick="checkQuiz(this, 'quiz-place', true)">A Cup of Zoo Cafe</button>
+        <button class="choice-btn" onclick="checkQuiz(this, 'quiz-place', false)">Zootopia</button>
+        <button class="choice-btn" onclick="checkQuiz(this, 'quiz-place', false)">Rain Tree Café</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PAGE 5: Quiz - Where did he ask? ====== -->
+  <section class="page" id="page-quiz-ask-place">
+    <div class="card">
+      <p class="question-text">💍 แล้วเค้าขอเธอเป็นแฟนที่ไหน?</p>
+      <div class="choices" id="quiz-ask-place">
+        <button class="choice-btn" onclick="checkQuiz(this, 'quiz-ask-place', false)">Central World</button>
+        <button class="choice-btn" onclick="checkQuiz(this, 'quiz-ask-place', false)">Central Phahonyothin</button>
+        <button class="choice-btn" onclick="checkQuiz(this, 'quiz-ask-place', true)">Central Ladprao</button>
+        <button class="choice-btn" onclick="checkQuiz(this, 'quiz-ask-place', false)">Central Pinklao</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PAGE 6: Memory Photo - First Date ====== -->
+  <section class="page" id="page-memory-firstdate">
+    <div class="photo-card">
+      <img src="memory/20250705.jpg" alt="วันแรกที่เดทกัน" loading="eager">
+      <div class="photo-info">
+        <p class="photo-date">05/07/2025</p>
+        <p class="photo-caption">นี่วันแรกที่เราไปเดทกัน เค้าแอบลูบหัวเธอ 🥰</p>
+      </div>
+    </div>
+    <button class="btn" onclick="navigateTo('page-quiz-flower')">
+      ไปต่อ →
+    </button>
+  </section>
+
+  <!-- ====== PAGE 7: Quiz - First Flower ====== -->
+  <section class="page" id="page-quiz-flower">
+    <div class="card">
+      <p class="question-text">💐 เค้าให้ดอกไม้อะไรเธอเป็นดอกแรก?</p>
+      <div class="choices" id="quiz-flower">
+        <button class="choice-btn" onclick="checkQuiz(this, 'quiz-flower', true)">ทิวลิป</button>
+        <button class="choice-btn" onclick="checkQuiz(this, 'quiz-flower', false)">กุหลาบ</button>
+        <button class="choice-btn" onclick="checkQuiz(this, 'quiz-flower', false)">ไฮเดนเยีย</button>
+        <button class="choice-btn" onclick="checkQuiz(this, 'quiz-flower', false)">คาร์เนลชัน</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PAGE 8: Photo - Tulip ====== -->
+  <section class="page" id="page-photo-tulip">
+    <div class="photo-card">
+      <img src="ans/tulip.jpg" alt="ดอกทิวลิปดอกแรก" loading="lazy">
+      <div class="photo-info">
+        <p class="photo-caption">ดอกไม้ดอกแรกสำหรับคนสวยของเค้า 🌷</p>
+      </div>
+    </div>
+    <button class="btn" onclick="navigateTo('page-gallery')">
+      ไปต่อ →
+    </button>
+  </section>
+
+  <!-- ====== PAGE 9: Memory Gallery ====== -->
+  <section class="page gallery-page" id="page-gallery">
+    <h2 class="gallery-header">📸 ความทรงจำของเรา</h2>
+    <p class="gallery-subheader">ตลอด 1 ปีที่ผ่านมา</p>
+    <div class="gallery-grid" id="gallery-container">
+      <!-- Dynamically rendered by JS -->
+    </div>
+    <button class="btn" onclick="navigateTo('page-final')" style="margin-top: 32px;">
+      ไปต่อ →
+    </button>
+  </section>
+
+  <!-- ====== PAGE 10: Final Message ====== -->
+  <section class="page final-page" id="page-final">
+    <div class="card">
+      <div class="heart-container" style="margin-bottom: 20px;">
+        <svg class="heart-svg" viewBox="0 0 512 512" style="width:80px;height:80px;" aria-hidden="true">
+          <path fill="url(#heartGrad)" d="M256 448l-30-27C118 322 48 261 48 181 48 117 98 64 160 64c36 0 70 17 96 44 26-27 60-44 96-44 62 0 112 53 112 117 0 80-70 141-178 240l-30 27z"/>
+        </svg>
+      </div>
+      <p class="final-line">ขอบคุณที่อยู่ด้วยกันมาตลอด 1 ปี</p>
+      <p class="final-line">เราจะมีความสุขด้วยกันแบบนี้ไปจนแก่ผมขาวเลยนะ</p>
+      <div class="divider"></div>
+      <p class="final-signature">รักนิ้งที่สุด จากอาร์ต</p>
+      <p class="final-date">10/07/2026</p>
+      <div class="final-hearts">💕</div>
+    </div>
+  </section>
+
+  <!-- ====== Wrong Answer Modal ====== -->
+  <div class="modal-overlay" id="wrong-modal">
+    <div class="modal-content">
+      <span class="modal-emoji">😭</span>
+      <p class="modal-text">จำไม่ได้หรอ เสียใจ</p>
+      <button class="modal-close-btn" id="modal-close-btn" onclick="closeModal()">
+        ลองใหม่นะ 💪
+      </button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

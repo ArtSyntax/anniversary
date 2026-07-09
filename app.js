@@ -1,0 +1,246 @@
+/* =========================================
+   Anniversary Surprise Website — App Logic
+   ========================================= */
+
+// --- Memory Photo List ---
+const MEMORY_PHOTOS = [
+  '20250705.jpg',
+  '20250710.JPG',
+  '20250810.jpg',
+  '20250910.jpg',
+  '20251010.jpg',
+  '20251110.jpg',
+  '20251210.jpg',
+  '20260110.jpg',
+  '20260210.jpg',
+  '20260310.jpg',
+  '20260411.jpg',
+  '20260510.jpg',
+  '20260610.png'
+];
+
+// --- Quiz → Next Page Mapping ---
+const QUIZ_NEXT_PAGE = {
+  'quiz-place': 'page-quiz-ask-place',
+  'quiz-ask-place': 'page-memory-firstdate',
+  'quiz-flower': 'page-photo-tulip'
+};
+
+// --- Date Answer ---
+const DATE_ANSWER = '10072025';
+
+// =============================================
+// Page Navigation
+// =============================================
+function navigateTo(pageId) {
+  const currentPage = document.querySelector('.page.active');
+  const nextPage = document.getElementById(pageId);
+
+  if (!nextPage) return;
+
+  if (currentPage) {
+    currentPage.classList.add('exit');
+    currentPage.addEventListener('animationend', function handler() {
+      currentPage.classList.remove('active', 'exit');
+      nextPage.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      currentPage.removeEventListener('animationend', handler);
+
+      // Initialize gallery if navigating to gallery page
+      if (pageId === 'page-gallery') {
+        renderGallery();
+      }
+    });
+  } else {
+    nextPage.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+}
+
+// =============================================
+// Date Question (Page 2)
+// =============================================
+function checkDateAnswer() {
+  const input = document.getElementById('date-answer');
+  const answer = input.value.trim();
+
+  if (answer === DATE_ANSWER) {
+    navigateTo('page-photo-before');
+  } else {
+    showWrongModal();
+  }
+}
+
+// Allow pressing Enter to submit date answer (setup in init)
+
+// =============================================
+// Quiz Handler (Pages 4, 5, 7)
+// =============================================
+function checkQuiz(btnElement, quizId, isCorrect) {
+  const choices = document.querySelectorAll(`#${quizId} .choice-btn`);
+
+  if (isCorrect) {
+    // Disable all choices
+    choices.forEach(btn => btn.classList.add('disabled'));
+
+    // Mark correct answer
+    btnElement.classList.add('correct');
+
+    // Navigate to next page after brief delay
+    const nextPage = QUIZ_NEXT_PAGE[quizId];
+    if (nextPage) {
+      setTimeout(() => {
+        navigateTo(nextPage);
+
+        // Reset quiz state after navigating away
+        setTimeout(() => {
+          choices.forEach(btn => {
+            btn.classList.remove('disabled', 'correct');
+          });
+        }, 600);
+      }, 800);
+    }
+  } else {
+    showWrongModal();
+  }
+}
+
+// =============================================
+// Wrong Answer Modal
+// =============================================
+function showWrongModal() {
+  const modal = document.getElementById('wrong-modal');
+  modal.classList.add('active');
+
+  // Re-trigger emoji animation
+  const emoji = modal.querySelector('.modal-emoji');
+  emoji.style.animation = 'none';
+  emoji.offsetHeight; // Force reflow
+  emoji.style.animation = '';
+}
+
+function closeModal() {
+  const modal = document.getElementById('wrong-modal');
+  modal.classList.remove('active');
+}
+
+// Close modal by clicking outside
+document.addEventListener('click', function(e) {
+  const modal = document.getElementById('wrong-modal');
+  if (e.target === modal) {
+    closeModal();
+  }
+});
+
+// =============================================
+// Gallery Rendering (Page 9)
+// =============================================
+function parseDateFromFilename(filename) {
+  const name = filename.split('.')[0];
+  const year = name.substring(0, 4);
+  const month = name.substring(4, 6);
+  const day = name.substring(6, 8);
+  return `${day}/${month}/${year}`;
+}
+
+function renderGallery() {
+  const container = document.getElementById('gallery-container');
+
+  // Don't re-render if already populated
+  if (container.children.length > 0) {
+    // Still trigger visibility animations
+    requestAnimationFrame(() => observeGalleryItems());
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+
+  MEMORY_PHOTOS.forEach((photo) => {
+    const dateStr = parseDateFromFilename(photo);
+
+    const item = document.createElement('div');
+    item.className = 'gallery-item';
+
+    const img = document.createElement('img');
+    img.src = `memory/${photo}`;
+    img.alt = `ความทรงจำ ${dateStr}`;
+    img.loading = 'lazy';
+
+    const dateDiv = document.createElement('div');
+    dateDiv.className = 'gallery-item-date';
+    dateDiv.textContent = dateStr;
+
+    item.appendChild(img);
+    item.appendChild(dateDiv);
+    fragment.appendChild(item);
+  });
+
+  container.appendChild(fragment);
+
+  // Observe items for scroll-reveal animation
+  requestAnimationFrame(() => observeGalleryItems());
+}
+
+function observeGalleryItems() {
+  const items = document.querySelectorAll('.gallery-item');
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Stagger the animation
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px 50px 0px'
+    });
+
+    items.forEach(item => observer.observe(item));
+  } else {
+    // Fallback: just show all items
+    items.forEach(item => item.classList.add('visible'));
+  }
+}
+
+// =============================================
+// Floating Hearts Background
+// =============================================
+function createFloatingHearts() {
+  const container = document.getElementById('floatingHearts');
+  const hearts = ['💗', '💕', '💖', '💘', '🩷', '♡', '❤️'];
+  const count = 15;
+
+  for (let i = 0; i < count; i++) {
+    const heart = document.createElement('span');
+    heart.className = 'floating-heart';
+    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+    heart.style.left = `${Math.random() * 100}%`;
+    heart.style.fontSize = `${0.8 + Math.random() * 1.2}rem`;
+    heart.style.setProperty('--duration', `${8 + Math.random() * 12}s`);
+    heart.style.setProperty('--delay', `${Math.random() * 10}s`);
+    container.appendChild(heart);
+  }
+}
+
+// =============================================
+// Initialize
+// =============================================
+document.addEventListener('DOMContentLoaded', function() {
+  createFloatingHearts();
+
+  // Allow pressing Enter to submit date answer
+  const dateInput = document.getElementById('date-answer');
+  if (dateInput) {
+    dateInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        checkDateAnswer();
+      }
+    });
+  }
+});
