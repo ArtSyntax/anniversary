@@ -21,7 +21,7 @@ const MEMORY_PHOTOS = [
 
 // --- Quiz → Next Page Mapping ---
 const QUIZ_NEXT_PAGE = {
-  'quiz-place': 'page-quiz-ask-place',
+  'quiz-place': 'page-photo-zoo',
   'quiz-ask-place': 'page-memory-firstdate',
   'quiz-flower': 'page-photo-tulip'
 };

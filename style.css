@@ -262,14 +262,14 @@ body {
   top: 20px;
   right: 20px;
   z-index: 100;
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   border: 1px solid rgba(255, 187, 204, 0.4);
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  font-size: 1.2rem;
+  font-size: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -658,7 +658,7 @@ body {
   opacity: 0;
   transform: translateY(12px);
   animation: fadeInLine 0.8s ease forwards;
-  animation-delay: 2.4s;
+  animation-delay: 3.2s;
 }
 
 .final-date {
@@ -669,15 +669,15 @@ body {
   letter-spacing: 1px;
   opacity: 0;
   animation: fadeInLine 0.8s ease forwards;
-  animation-delay: 3s;
+  animation-delay: 4.0s;
 }
 
 .final-hearts {
   font-size: 2.5rem;
   margin-top: 24px;
   opacity: 0;
-  animation: fadeInLine 0.8s ease forwards, heartPulse 1.5s ease-in-out 3.6s infinite;
-  animation-delay: 3.4s;
+  animation: fadeInLine 0.8s ease forwards, heartPulse 1.5s ease-in-out 4.8s infinite;
+  animation-delay: 4.8s;
 }
 
 @keyframes fadeInLine {

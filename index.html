@@ -11,6 +11,7 @@
   
   <!-- Preload Critical Images for Faster Page Transitions -->
   <link rel="preload" href="ans/0_month.jpg" as="image">
+  <link rel="preload" href="ans/zoo.jpg" as="image">
   <link rel="preload" href="memory/20250705.jpg" as="image">
   <link rel="preload" href="ans/tulip.jpg" as="image">
 </head>
@@ -106,6 +107,19 @@
     </div>
   </section>
 
+  <!-- ====== PAGE 4.5: Photo - Zoo ====== -->
+  <section class="page" id="page-photo-zoo">
+    <div class="photo-card">
+      <img src="ans/zoo.jpg" alt="A Cup of Zoo Cafe" loading="lazy">
+      <div class="photo-info">
+        <p class="photo-caption">ไปดูสัตว์น่ารักๆ ด้วยกัน แต่นิ้งน่ารักที่สุด 🐰</p>
+      </div>
+    </div>
+    <button class="btn" onclick="navigateTo('page-quiz-ask-place')">
+      ไปต่อ →
+    </button>
+  </section>
+
   <!-- ====== PAGE 5: Quiz - Where did he ask? ====== -->
   <section class="page" id="page-quiz-ask-place">
     <div class="card">
@@ -176,11 +190,22 @@
     <div class="card">
       <div class="heart-container" style="margin-bottom: 20px;">
         <svg class="heart-svg" viewBox="0 0 512 512" style="width:80px;height:80px;" aria-hidden="true">
-          <path fill="url(#heartGrad)" d="M256 448l-30-27C118 322 48 261 48 181 48 117 98 64 160 64c36 0 70 17 96 44 26-27 60-44 96-44 62 0 112 53 112 117 0 80-70 141-178 240l-30 27z"/>
+          <defs>
+            <linearGradient id="heartGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#FF8FAB"/>
+              <stop offset="50%" style="stop-color:#FF6B8A"/>
+              <stop offset="100%" style="stop-color:#FF4D6D"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#heartGrad2)" d="M256 448l-30-27C118 322 48 261 48 181 48 117 98 64 160 64c36 0 70 17 96 44 26-27 60-44 96-44 62 0 112 53 112 117 0 80-70 141-178 240l-30 27z"/>
         </svg>
       </div>
-      <p class="final-line">ขอบคุณที่อยู่ด้วยกันมาตลอด 1 ปี</p>
-      <p class="final-line">เราจะมีความสุขด้วยกันแบบนี้ไปจนแก่ผมขาวเลยนะ</p>
+      <h2 class="title" style="margin-bottom: 16px; opacity: 0; animation: fadeInLine 0.8s ease forwards; animation-delay: 0.4s;">N/A 1st Anniversary</h2>
+      <p class="final-line" style="animation-delay: 0.8s;">ขอบคุณที่อยู่ด้วยกันมาตลอด 1 ปี</p>
+      <div class="final-line" style="margin: 12px 0; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); animation-delay: 1.6s;">
+        <img src="ans/marriage.jpg" alt="ความทรงจำของเรา" style="width: 100%; display: block;">
+      </div>
+      <p class="final-line" style="animation-delay: 2.4s;">เราจะมีความสุขแบบนี้ไปจนผมขาวเลย</p>
       <div class="divider"></div>
       <p class="final-signature">รักนิ้งที่สุด จากอาร์ต</p>
       <p class="final-date">10/07/2026</p>
