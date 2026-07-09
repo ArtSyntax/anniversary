@@ -370,7 +370,7 @@ function startIntro() {
         btn.textContent = '🎵';
       }
       removeUnlockListeners();
-    }, 5600);
+    }, 3500);
     
     setTimeout(() => {
       landing.classList.remove('intro-animating');
