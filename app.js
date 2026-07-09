@@ -271,8 +271,12 @@ function pauseMusic() {
   btn.textContent = '🔇';
 }
 
+// Flag to prevent unlockAudio from playing music during intro
+let introInProgress = true;
+
 // Unlock audio on first user interaction
 function unlockAudio() {
+  if (introInProgress) return; // Don't auto-play music during intro
   const music = document.getElementById('bg-music');
   if (music && music.paused) {
     music.play().then(() => {
@@ -280,8 +284,8 @@ function unlockAudio() {
       if (btn) {
         btn.classList.add('playing');
         btn.textContent = '🎵';
+        btn.style.display = '';
       }
-      // Remove listeners once successfully playing
       removeUnlockListeners();
     }).catch((err) => {
       console.log("Waiting for a stronger user gesture to play audio...");
@@ -336,17 +340,24 @@ function startIntro() {
     // Try to ensure heartbeat plays in case it was blocked on load
     playHeartbeat();
     
-    // Wait 3 seconds, then stop heartbeat and play main music
+    // Wait ~4.6 seconds (5 beats), then stop heartbeat
     setTimeout(() => {
       const hb = document.getElementById('heartbeat-sound');
       if (hb) hb.pause();
-      
+    }, 4600);
+    
+    // Play main music after the greeting text "สวัสดีครับพี่นิ้ง" finishes fading in (5.6s)
+    setTimeout(() => {
+      introInProgress = false;
       playMusic();
-    }, 3000);
+      const btn = document.getElementById('music-toggle');
+      if (btn) btn.style.display = '';
+      removeUnlockListeners();
+    }, 5600);
     
     setTimeout(() => {
       landing.classList.remove('intro-animating');
-    }, 1600);
+    }, 6000);
   }
 }
 

@@ -748,7 +748,7 @@ body {
 }
 
 .page.intro-animating .card {
-  animation: introCardReveal 1s ease forwards 0.3s;
+  animation: introCardReveal 1s ease forwards 4.5s;
 }
 
 .page.intro-waiting .sparkle,
@@ -770,11 +770,12 @@ body {
 }
 
 .page.intro-animating .heart-container {
-  animation: introMoveUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  transform: translateY(20vh);
+  animation: introMoveUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards 4.5s;
 }
 
 .page.intro-animating .heart-svg {
-  animation: introBeatsOnce 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation: introBeats5 4.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 .page.intro-waiting .greeting,
@@ -793,12 +794,12 @@ body {
   transform: translateY(15px);
 }
 
-.page.intro-animating .greeting { animation: introFadeIn 0.8s ease forwards 0.3s; }
-.page.intro-animating .title { animation: introFadeIn 0.8s ease forwards 0.4s; }
-.page.intro-animating .divider { animation: introFadeIn 0.8s ease forwards 0.5s; }
-.page.intro-animating .subtitle { animation: introFadeIn 0.8s ease forwards 0.6s; }
-.page.intro-animating .hint-text { animation: introFadeIn 0.8s ease forwards 0.7s; }
-.page.intro-animating .btn { animation: introFadeIn 0.8s ease forwards 0.8s; }
+.page.intro-animating .greeting { animation: introFadeIn 0.8s ease forwards 4.8s; }
+.page.intro-animating .title { animation: introFadeIn 0.8s ease forwards 4.9s; }
+.page.intro-animating .divider { animation: introFadeIn 0.8s ease forwards 5.0s; }
+.page.intro-animating .subtitle { animation: introFadeIn 0.8s ease forwards 5.1s; }
+.page.intro-animating .hint-text { animation: introFadeIn 0.8s ease forwards 5.2s; }
+.page.intro-animating .btn { animation: introFadeIn 0.8s ease forwards 5.3s; }
 
 @keyframes introCardReveal {
   to {
@@ -820,9 +821,17 @@ body {
   50% { transform: scale(1.8); filter: drop-shadow(0 15px 40px rgba(255, 77, 109, 0.8)); }
 }
 
-@keyframes introBeatsOnce {
+@keyframes introBeats5 {
   0% { transform: scale(1.5); filter: drop-shadow(0 10px 30px rgba(255, 77, 109, 0.6)); }
+  10% { transform: scale(1.8); filter: drop-shadow(0 15px 40px rgba(255, 77, 109, 0.8)); }
+  20% { transform: scale(1.5); filter: drop-shadow(0 10px 30px rgba(255, 77, 109, 0.6)); }
   30% { transform: scale(1.8); filter: drop-shadow(0 15px 40px rgba(255, 77, 109, 0.8)); }
+  40% { transform: scale(1.5); filter: drop-shadow(0 10px 30px rgba(255, 77, 109, 0.6)); }
+  50% { transform: scale(1.8); filter: drop-shadow(0 15px 40px rgba(255, 77, 109, 0.8)); }
+  60% { transform: scale(1.5); filter: drop-shadow(0 10px 30px rgba(255, 77, 109, 0.6)); }
+  70% { transform: scale(1.8); filter: drop-shadow(0 15px 40px rgba(255, 77, 109, 0.8)); }
+  80% { transform: scale(1.5); filter: drop-shadow(0 10px 30px rgba(255, 77, 109, 0.6)); }
+  90% { transform: scale(1.8); filter: drop-shadow(0 15px 40px rgba(255, 77, 109, 0.8)); }
   100% { transform: scale(1); filter: drop-shadow(0 8px 24px rgba(255, 77, 109, 0.4)); }
 }
 
