@@ -292,7 +292,7 @@ function unlockAudio() {
 }
 
 function removeUnlockListeners() {
-  ['click', 'touchstart', 'keydown', 'pointerdown', 'mousedown'].forEach(evt => {
+  ['click', 'touchend', 'touchstart', 'keydown', 'pointerdown', 'mousedown'].forEach(evt => {
     window.removeEventListener(evt, unlockAudio, { capture: true });
   });
 }
@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
   preloadRemainingImages();
 
   // Setup fallback auto-play trigger on first interaction (in case blocked)
-  ['click', 'touchstart', 'keydown', 'pointerdown', 'mousedown'].forEach(evt => {
+  ['click', 'touchend', 'touchstart', 'keydown', 'pointerdown', 'mousedown'].forEach(evt => {
     window.addEventListener(evt, unlockAudio, { capture: true, passive: true });
   });
 });
