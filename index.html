@@ -5,9 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="description" content="Happy 1st Anniversary 💕">
   <meta name="theme-color" content="#FFE4EE">
-  <title>Happy Anniversary 💕</title>
+  <title>N/A Happy Anniversary 💕</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💕</text></svg>">
+  
+  <!-- Preload Critical Images for Faster Page Transitions -->
+  <link rel="preload" href="ans/0_month.jpg" as="image">
+  <link rel="preload" href="memory/20250705.jpg" as="image">
+  <link rel="preload" href="ans/tulip.jpg" as="image">
 </head>
 <body>
 
@@ -15,7 +20,7 @@
   <div class="floating-hearts" aria-hidden="true" id="floatingHearts"></div>
 
   <!-- ====== Background Music ====== -->
-  <audio id="bg-music" src="music/จากฝัน.mp3" autoplay loop playsinline></audio>
+  <audio id="bg-music" src="music/จากฝัน.mp3" preload="auto" autoplay loop playsinline></audio>
   <button id="music-toggle" class="music-toggle-btn" onclick="toggleMusic()" aria-label="Toggle Music">
     🎵
   </button>
@@ -46,7 +51,7 @@
       <div class="divider"></div>
       <p class="subtitle">มีความสุขมากๆ ตลอด 1 ปี ที่อยู่ด้วยกัน</p>
       <p class="hint-text">ไม่เชื่อลองกดเข้าไปดูสิ 👇</p>
-      <button class="btn" id="btn-start" onclick="navigateTo('page-date-question')">
+      <button class="btn" id="btn-start" onclick="playMusic(); navigateTo('page-date-question')">
         เข้าไปดูสิ 💕
       </button>
     </div>

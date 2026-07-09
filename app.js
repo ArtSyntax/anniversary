@@ -297,6 +297,20 @@ function removeUnlockListeners() {
   });
 }
 
+// Preload all remaining memory gallery images in the background
+function preloadRemainingImages() {
+  // We already preloaded 20250705.jpg via HTML head
+  const remaining = MEMORY_PHOTOS.filter(p => p !== '20250705.jpg');
+  
+  // Use a slight delay to allow critical resources to load first
+  setTimeout(() => {
+    remaining.forEach(photo => {
+      const img = new Image();
+      img.src = `memory/${photo}`;
+    });
+  }, 1500);
+}
+
 // =============================================
 // Initialize
 // =============================================
@@ -316,6 +330,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Attempt to play music immediately
   playMusic();
+
+  // Preload gallery images in the background
+  preloadRemainingImages();
 
   // Setup fallback auto-play trigger on first interaction (in case blocked)
   ['click', 'touchstart', 'keydown', 'pointerdown', 'mousedown'].forEach(evt => {
