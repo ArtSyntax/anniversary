@@ -26,13 +26,16 @@ const QUIZ_NEXT_PAGE = {
   'quiz-flower': 'page-photo-tulip'
 };
 
-// --- Date Answer ---
-const DATE_ANSWER = '10072025';
+// --- Date Answers ---
+const DATE_ANSWERS = ['10072025', '10072568'];
 
 // =============================================
 // Page Navigation
 // =============================================
 function navigateTo(pageId) {
+  // Force attempt playing music as page transition is triggered by user interaction
+  playMusic();
+
   const currentPage = document.querySelector('.page.active');
   const nextPage = document.getElementById(pageId);
 
@@ -61,10 +64,13 @@ function navigateTo(pageId) {
 // Date Question (Page 2)
 // =============================================
 function checkDateAnswer() {
+  // Force play music on quiz submit
+  playMusic();
+
   const input = document.getElementById('date-answer');
   const answer = input.value.trim();
 
-  if (answer === DATE_ANSWER) {
+  if (DATE_ANSWERS.includes(answer)) {
     navigateTo('page-photo-before');
   } else {
     showWrongModal();
@@ -77,6 +83,9 @@ function checkDateAnswer() {
 // Quiz Handler (Pages 4, 5, 7)
 // =============================================
 function checkQuiz(btnElement, quizId, isCorrect) {
+  // Force play music on option selection
+  playMusic();
+
   const choices = document.querySelectorAll(`#${quizId} .choice-btn`);
 
   if (isCorrect) {
@@ -228,6 +237,67 @@ function createFloatingHearts() {
 }
 
 // =============================================
+// Background Music Control
+// =============================================
+let audioContextUnlocked = false;
+
+function toggleMusic() {
+  const music = document.getElementById('bg-music');
+  const btn = document.getElementById('music-toggle');
+  
+  if (music.paused) {
+    playMusic();
+  } else {
+    pauseMusic();
+  }
+}
+
+function playMusic() {
+  const music = document.getElementById('bg-music');
+  const btn = document.getElementById('music-toggle');
+  music.play().then(() => {
+    btn.classList.add('playing');
+    btn.textContent = '🎵';
+  }).catch((err) => {
+    console.log("Audio play blocked by browser policy. Waiting for user interaction.");
+  });
+}
+
+function pauseMusic() {
+  const music = document.getElementById('bg-music');
+  const btn = document.getElementById('music-toggle');
+  music.pause();
+  btn.classList.remove('playing');
+  btn.textContent = '🔇';
+}
+
+// Unlock audio on first user interaction
+function unlockAudio() {
+  const music = document.getElementById('bg-music');
+  if (music && music.paused) {
+    music.play().then(() => {
+      const btn = document.getElementById('music-toggle');
+      if (btn) {
+        btn.classList.add('playing');
+        btn.textContent = '🎵';
+      }
+      // Remove listeners once successfully playing
+      removeUnlockListeners();
+    }).catch((err) => {
+      console.log("Waiting for a stronger user gesture to play audio...");
+    });
+  } else {
+    removeUnlockListeners();
+  }
+}
+
+function removeUnlockListeners() {
+  ['click', 'touchstart', 'keydown', 'pointerdown', 'mousedown'].forEach(evt => {
+    window.removeEventListener(evt, unlockAudio, { capture: true });
+  });
+}
+
+// =============================================
 // Initialize
 // =============================================
 document.addEventListener('DOMContentLoaded', function() {
@@ -243,4 +313,12 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+
+  // Attempt to play music immediately
+  playMusic();
+
+  // Setup fallback auto-play trigger on first interaction (in case blocked)
+  ['click', 'touchstart', 'keydown', 'pointerdown', 'mousedown'].forEach(evt => {
+    window.addEventListener(evt, unlockAudio, { capture: true, passive: true });
+  });
 });
