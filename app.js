@@ -340,18 +340,32 @@ function startIntro() {
     // Try to ensure heartbeat plays in case it was blocked on load
     playHeartbeat();
     
+    // Unlock bg-music on iOS by playing silently during user gesture
+    const music = document.getElementById('bg-music');
+    if (music) {
+      music.volume = 0;
+      music.play().catch(() => {});
+    }
+    
     // Wait ~4.6 seconds (5 beats), then stop heartbeat
     setTimeout(() => {
       const hb = document.getElementById('heartbeat-sound');
       if (hb) hb.pause();
     }, 4600);
     
-    // Play main music after the greeting text "สวัสดีครับพี่นิ้ง" finishes fading in (5.6s)
+    // Unmute music after the greeting text "สวัสดีครับพี่นิ้ง" finishes fading in
     setTimeout(() => {
       introInProgress = false;
-      playMusic();
+      if (music) {
+        music.volume = 1;
+        music.currentTime = 0;
+      }
       const btn = document.getElementById('music-toggle');
-      if (btn) btn.style.display = '';
+      if (btn) {
+        btn.style.display = '';
+        btn.classList.add('playing');
+        btn.textContent = '🎵';
+      }
       removeUnlockListeners();
     }, 5600);
     
