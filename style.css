@@ -35,6 +35,7 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #FFE4EE; /* Prevent white flash during scroll bounce */
 }
 
 body {
